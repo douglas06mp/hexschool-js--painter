@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>畫版</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css" integrity="sha384-i1LQnF23gykqWXg6jxC2ZbCbUMxyw5gLZY6UiUS98LYV5unm8GWmfkIS6jqJfb4E" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+  </head>
+  <body>
+
+    <canvas id="myCanvas"></canvas>
+
+    <div class="toolbar-top toolbar flex-center">
+      <div class="action flex-center save">
+        <i class="fas fa-save"></i>
+        <div>SAVE</div>
+      </div>
+      <div class="action flex-center clear">
+        <i class="fas fa-trash-alt"></i>
+        <div>CLEAR ALL</div>
+      </div>
+      <div class="action flex-center undo disable">
+        <i class="fas fa-undo"></i>
+        <div>UNDO</div>
+      </div>
+      <div class="action flex-center redo">
+        <i class="fas fa-redo"></i>
+        <div>REDO</div>
+      </div>
+      <div class="hide hide-btn"><i class="fas fa-chevron-up"></i></div>
+    </div>
+
+
+    <div class="toolbar-bottom toolbar flex-center">
+      <div class="hide hide-btn"><i class="fas fa-chevron-down"></i></div>
+      <div class="tool flex-center paint"><i class="fas fa-paint-brush"></i></div>
+      <div class="tool flex-center erase"><i class="fas fa-eraser"></i></div>
+      <div class="tool flex-center size">
+        <div class="label">SIZE:</div>
+        <input type="text" min="1" value="5" oninput="validity.valid||(value='');">
+        px
+      </div>
+      <div class="tool flex-center color">
+        <div class="label">COLOR:</div>
+        <div class="colorSpan flex-center">
+          <span></span>
+          <span>✓</span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+
+
+    <script src="app.js" charset="utf-8"></script>
+  </body>
+</html>
