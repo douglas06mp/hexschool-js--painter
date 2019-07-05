@@ -125,23 +125,40 @@ function cursorMove(e){
 
 
 // CANVAS DRAW FUNCTION
+// START
 canvas.addEventListener('mousedown', e => {
   saveDraw();
   mousePressed = true;
   paint(e.offsetX, e.offsetY, false)
 });
 
+canvas.addEventListener('touchstart', e => {
+  saveDraw();
+  mousePressed = true;
+  const touch = e.targetTouches[0];
+  e.preventDefault();
+  paint(touch.pageX, touch.pageY, false);
+})
+
+
+// MOVE
 canvas.addEventListener('mousemove', e => {
   if(mousePressed) paint(e.offsetX, e.offsetY, true);
 });
 
-canvas.addEventListener('mousemove', e => {
-  cursorMove(e);
+canvas.addEventListener('mousemove', cursorMove);
+
+canvas.addEventListener('touchemove', e => {
+  const touch = e.targetTouches[0];
+  e.preventDefault();
+  if(mousePressed) paint(touch.pageX, touch.pagetY, true);
 });
 
-['mouseup','mouseleave'].forEach(evt => {
-  canvas.addEventListener(evt, () => {
+// END
+['mouseup','mouseleave','touchend'].forEach(evt => {
+  canvas.addEventListener(evt, e => {
     mousePressed = false;
+    e.preventDefault();
   });
 });
 
