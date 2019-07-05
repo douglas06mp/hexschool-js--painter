@@ -148,7 +148,7 @@ canvas.addEventListener('mousemove', e => {
 
 canvas.addEventListener('mousemove', cursorMove);
 
-canvas.addEventListener('touchemove', e => {
+canvas.addEventListener('touchmove', e => {
   const touch = e.targetTouches[0];
   e.preventDefault();
   if(mousePressed) paint(touch.pageX, touch.pagetY, true);
