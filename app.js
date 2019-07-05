@@ -20,8 +20,11 @@ let undoDataStack = [];
 let redoDataStack = [];
 
 // TOOLBAR BOTTOM
-const widthInput = document.querySelector('input[type="text"]');
+const widthInput = document.querySelector('input[type="number"]');
 const colorSpan = document.querySelectorAll('span');
+
+const colorPicker = document.querySelector('span:last-child')
+const inputColor = document.querySelector('input[type="color"]')
 
 const eraser = document.querySelector('.erase');
 const painter = document.querySelector('.paint');
@@ -30,6 +33,9 @@ const painter = document.querySelector('.paint');
 const hidebtn = document.querySelectorAll('.hide-btn');
 const toolbarTop = document.querySelector('.toolbar-top');
 const toolbarBottom = document.querySelector('.toolbar-bottom')
+
+// CURSOR
+const cursor = document.querySelector('.cursor');
 
 // variable
 var colors = ['#fff','#000000','#9BFFCD','#00CC99','#01936F'];
@@ -104,6 +110,14 @@ function hideToolbar(e){
   hidebtn[1].innerHTML === up ? hidebtn[1].innerHTML = down : hidebtn[1].innerHTML = up;
 }
 
+// CURSOR
+function cursorMove(e){
+  cursor.style.width = width + 'px';
+  cursor.style.height = width + 'px';
+  cursor.style.backgroundColor = color;
+  cursor.style.top = e.offsetY - width/2 + 'px';
+  cursor.style.left = e.offsetX - width/2 + 'px';
+}
 
 
 
@@ -121,6 +135,10 @@ canvas.addEventListener('mousemove', e => {
   if(mousePressed) paint(e.offsetX, e.offsetY, true);
 });
 
+canvas.addEventListener('mousemove', e => {
+  cursorMove(e);
+});
+
 ['mouseup','mouseleave'].forEach(evt => {
   canvas.addEventListener(evt, () => {
     mousePressed = false;
@@ -133,7 +151,7 @@ canvas.addEventListener('mousemove', e => {
 eraser.addEventListener('click', () => {
   lastColor = color;
   Array.from(colorSpan).forEach(s => {
-    s.textContent = '';
+    s.classList.remove('selected');
   });
   eraser.classList.add('animated','heartBeat');
   eraser.style.color = '#000000';
@@ -149,7 +167,7 @@ painter.addEventListener('click', () => {
   eraser.style.color = '#E8E8E8';
   Array.from(colorSpan).forEach(s => {
     if(s.style.backgroundColor == lastColor){
-      s.textContent = '✓';
+      s.classList.add('selected');
     }
   });
   color = lastColor;
@@ -171,10 +189,16 @@ colorSpan.forEach(span => span.addEventListener('click', function(e){
   painter.style.color = '#000';
   eraser.style.color = '#E8E8E8';
   Array.from(colorSpan).forEach(s => {
-    s.textContent = '';
+    s.classList.remove('selected');
   });
-  this.textContent = '✓';
+  this.classList.add('selected');
 }));
+
+//COLOR PICKER
+inputColor.addEventListener('change', () => {
+  color = inputColor.value;
+});
+
 
 // SAVE
 save.addEventListener('click', (e) => {

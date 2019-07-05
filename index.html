@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
   </head>
   <body>
-
+    <div class="cursor"></div>
     <canvas id="myCanvas"></canvas>
 
     <div class="toolbar-top toolbar flex-center">
@@ -39,17 +39,18 @@
       <div class="tool flex-center erase"><i class="fas fa-eraser"></i></div>
       <div class="tool flex-center size">
         <div class="label">SIZE:</div>
-        <input type="text" min="1" value="5" oninput="validity.valid||(value='');">
+        <input type="number" min="1" value="5" oninput="validity.valid||(value='');">
         px
       </div>
-      <div class="tool flex-center color">
+      <div class="tool flex-center">
         <div class="label">COLOR:</div>
         <div class="colorSpan flex-center">
           <span></span>
-          <span>✓</span>
+          <span class="selected"></span>
           <span></span>
           <span></span>
           <span></span>
+          <span><input type="color" value="#ff0000"/></span>
         </div>
       </div>
     </div>
